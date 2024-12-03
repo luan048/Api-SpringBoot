@@ -22,39 +22,45 @@ public class apiSpring {
 }
 
 @Entity
-class Demo {
+class Demo { // Class com as informacoes do Demo
     @Id
     Long id;
     String name;
     String description;
 
+    // Metodo para listar Id
     public Long getId() {
         return id;
     }
 
+    // Metodo para criar Id
     public void setId(Long id) {
         this.id = id;
     }
 
+    // Metodo para listar Name
     public String getName() {
         return name;
     }
 
+    // Metodo para criar Name
     public void setName(String name) {
         this.name = name;
     }
 
+    // Metodo para listar Description
     public String getDescription() {
         return description;
     }
 
+    // Metodo para criar Description
     public void setDescription(String description) {
         this.description = description;
     }
 }
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") // Definindo uma rota
 class DemoController {
     DemoService demoService;
 
@@ -62,7 +68,7 @@ class DemoController {
         this.demoService = demoService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // Complementa a rota, para realizar uma operação de listagem pelo Id
     public Demo getDemo(@PathVariable("id") Long id) {
         return demoService.getDemo(id).orElse(null);
     }
@@ -77,7 +83,7 @@ class DemoService {
     }
 
     public Optional<Demo> getDemo(Long id) {
-        return demoRepository.findById(id);
+        return demoRepository.findById(id);  // Retorna o Demo pelo Id, caso corresponda aos cadastrados
     }
 }
 
